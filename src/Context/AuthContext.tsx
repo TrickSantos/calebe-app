@@ -7,6 +7,7 @@ import { IUsuario } from "../../declarations";
 interface AuthContextProps {
   signed: boolean;
   user: IUsuario | null;
+  setUser: React.Dispatch<React.SetStateAction<IUsuario | null>>;
   login(email: string, password: string): Promise<AxiosResponse>;
   logout(): Promise<AxiosResponse>;
   loading: boolean;
@@ -71,7 +72,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ signed: !!user, user, login, logout, loading }}
+      value={{ signed: !!user, user, setUser, login, logout, loading }}
     >
       {children}
     </AuthContext.Provider>

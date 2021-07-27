@@ -1,13 +1,29 @@
 import React from "react";
-import { View, Text } from "react-native";
+import styled from "styled-components/native";
 
-interface Props {}
+const Container = styled.View`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #127c82;
+`;
+const Text = styled.Text`
+  color: white;
+  font-family: "Poppins";
+  font-size: 18px;
+  font-weight: 500;
+  margin: 1rem 0;
+`;
 
-const Desafios = (props: Props) => {
+const Desafios = () => {
   return (
-    <View>
+    <Container>
       <Text>Desafios</Text>
-    </View>
+      <Container>
+        <Text>Desafios ainda não liberados!</Text>
+      </Container>
+    </Container>
   );
 };
 

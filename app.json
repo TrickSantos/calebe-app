@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "calebe-pwa",
-    "slug": "calebe-pwa",
+    "name": "CalebeOn",
+    "slug": "CalebeOn",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/calebe.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/calebe.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#127c82"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -21,12 +21,17 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/calebe.png",
+        "backgroundColor": "#127c82"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/calebe.png"
+    },
+    "platforms": [
+      "android",
+      "web",
+      "ios"
+    ]
   }
 }

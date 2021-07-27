@@ -7,9 +7,16 @@ import logo from "../../assets/calebe.png";
 import { StackScreenProps } from "@react-navigation/stack";
 import { useAuth } from "../Context/AuthContext";
 import api from "../Services/api";
-import { Snackbar } from "react-native-paper";
+import { ActivityIndicator, Snackbar } from "react-native-paper";
 import { AxiosError } from "axios";
-import { Button, ButtonInsideText, FormItem, Label } from "../Components";
+import {
+  Button,
+  ButtonInsideText,
+  ErrorText,
+  FormItem,
+  Input,
+  Label,
+} from "../Components";
 
 const Container = styled.View`
   flex: 1;
@@ -42,16 +49,6 @@ const LoginForm = styled.View`
   align-items: center;
   border-top-right-radius: 40px;
   border-top-left-radius: 40px;
-`;
-
-const Input = styled.TextInput`
-  height: 50px;
-  width: 100%;
-  background-color: #86bcbe;
-  font-family: "Poppins";
-  color: #127c82;
-  padding: 1rem;
-  border-radius: 20px;
 `;
 
 const TextButton = styled.TouchableOpacity`
@@ -114,10 +111,13 @@ function Login({ navigation }: Props) {
   };
 
   const onSubmit = async (data: { email: string; password: string }) => {
-    await login(data.email, data.password).catch(({ response }: AxiosError) => {
-      setDisplay(true);
-      setMessage(response?.data.message);
-    });
+    setLoading(true);
+    await login(data.email, data.password)
+      .catch(({ response }: AxiosError) => {
+        setDisplay(true);
+        setMessage(response?.data.message);
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -133,55 +133,69 @@ function Login({ navigation }: Props) {
       <LoginForm>
         <FormItem>
           <Label>Email</Label>
-          <InputIconText>
-            <Feather name="mail" size={18} color="#127c82" />
-            <Controller
-              name="email"
-              control={control}
-              rules={{
-                required: "O email deve ser informado",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                  message: "Entre com um email válido",
-                },
-              }}
-              render={({ field: { value, onBlur, onChange } }) => (
-                <Input
-                  autoCompleteType="email"
-                  placeholderTextColor="#127C82"
-                  placeholder="Email"
-                  onChange={onChange}
-                  value={value}
-                  onBlur={onBlur}
-                />
-              )}
-            />
-          </InputIconText>
-        </FormItem>
-        {!recuperar && (
-          <FormItem style={{ marginBottom: "2.5rem" }}>
-            <Label>Senha</Label>
-            <InputIconText>
-              <SimpleLineIcons name="lock" size={18} color="#127c82" />
-              <Controller
-                name="password"
-                control={control}
-                rules={{
-                  required: "A senha precisa ser informada",
-                }}
-                render={({ field: { value, onBlur, onChange } }) => (
+
+          <Controller
+            name="email"
+            control={control}
+            rules={{
+              required: "O email deve ser informado",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: "Entre com um email válido",
+              },
+            }}
+            render={({
+              field: { value, onBlur, onChange },
+              fieldState: { error },
+            }) => (
+              <>
+                <InputIconText>
+                  <Feather name="mail" size={18} color="#127c82" />
                   <Input
-                    autoCompleteType="password"
-                    secureTextEntry
+                    autoCompleteType="email"
                     placeholderTextColor="#127C82"
-                    placeholder="Senha"
+                    placeholder="Email"
                     onChange={onChange}
                     value={value}
                     onBlur={onBlur}
                   />
-                )}
-              />
-            </InputIconText>
+                </InputIconText>
+                {error && <ErrorText>{error.message}</ErrorText>}
+              </>
+            )}
+          />
+        </FormItem>
+        {!recuperar && (
+          <FormItem style={{ marginBottom: "2.5rem" }}>
+            <Label>Senha</Label>
+
+            <Controller
+              name="password"
+              control={control}
+              rules={{
+                required: "A senha precisa ser informada",
+              }}
+              render={({
+                field: { value, onBlur, onChange },
+                fieldState: { error },
+              }) => (
+                <>
+                  <InputIconText>
+                    <SimpleLineIcons name="lock" size={18} color="#127c82" />
+                    <Input
+                      autoCompleteType="password"
+                      secureTextEntry
+                      placeholderTextColor="#127C82"
+                      placeholder="Senha"
+                      onChange={onChange}
+                      value={value}
+                      onBlur={onBlur}
+                    />
+                  </InputIconText>
+                  {error && <ErrorText>{error.message}</ErrorText>}
+                </>
+              )}
+            />
           </FormItem>
         )}
         <FormItem style={{ marginBottom: 0 }}>
@@ -205,12 +219,24 @@ function Login({ navigation }: Props) {
             }}
           >
             <ButtonInsideText>
-              {recuperar ? "Enviar" : "Entrar"}
+              {loading ? (
+                <ActivityIndicator animating={true} color="#FFF" />
+              ) : recuperar ? (
+                "Enviar"
+              ) : (
+                "Entrar"
+              )}
             </ButtonInsideText>
           </Button>
           <TextButton onPress={() => setRecuperar(!recuperar)}>
             <TextButtonInside>
-              {recuperar ? "Voltar para login" : "Esqueceu a senha?"}
+              {loading ? (
+                <ActivityIndicator animating={true} color="#FFF" />
+              ) : recuperar ? (
+                "Voltar para login"
+              ) : (
+                "Esqueceu a senha?"
+              )}
             </TextButtonInside>
           </TextButton>
         </FormItem>

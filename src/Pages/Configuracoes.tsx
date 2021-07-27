@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Feather, AntDesign } from "@expo/vector-icons";
-import { Avatar } from "react-native-paper";
+import { ActivityIndicator, Avatar } from "react-native-paper";
 import styled from "styled-components/native";
 import { useAuth } from "../Context/AuthContext";
 import { StackScreenProps } from "@react-navigation/stack";
@@ -61,6 +61,8 @@ type Props = StackScreenProps<RootStackParamList, "Configuracao">;
 
 const Configuracoes = ({ navigation }: Props) => {
   const { logout, user } = useAuth();
+  const [loading, setLoading] = useState(false);
+
   return (
     <Container>
       <PerfilContainer>
@@ -104,9 +106,20 @@ const Configuracoes = ({ navigation }: Props) => {
           elevation: 3,
         }}
       >
-        <Menu onPress={() => logout()}>
+        <Menu
+          onPress={async () => {
+            setLoading(true);
+            await logout().finally(() => setLoading(false));
+          }}
+        >
           <AntDesign name="logout" size={24} color="red" />
-          <NomeText style={{ color: "red" }}>Sair</NomeText>
+          <NomeText style={{ color: "red" }}>
+            {loading ? (
+              <ActivityIndicator animating={true} color="red" />
+            ) : (
+              "Sair"
+            )}
+          </NomeText>
           <AntDesign name="right" size={24} color="red" />
         </Menu>
       </MenuContainer>
