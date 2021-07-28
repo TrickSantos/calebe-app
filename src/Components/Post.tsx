@@ -3,6 +3,7 @@ import { ListRenderItem } from "react-native";
 import styled from "styled-components/native";
 import { IDevocional } from "../../declarations";
 import { FontAwesome5, FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import VideoPlayer from "./VideoPlayer";
 
 const Container = styled.View`
   background-color: #ffffff;
@@ -87,7 +88,7 @@ const CommentText = styled.Text`
   margin-right: 5px;
 `;
 
-const ActionContainer = styled.View`
+const ActionContainer = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -95,7 +96,7 @@ const ActionContainer = styled.View`
 `;
 
 const Post: ListRenderItem<IDevocional> = ({
-  item: { verso, conteudo, titulo, autor, video },
+  item: { verso, conteudo, titulo, autor, video, comentarios, likes },
 }) => {
   return (
     <Container
@@ -122,16 +123,22 @@ const Post: ListRenderItem<IDevocional> = ({
         <Titulo>{titulo}</Titulo>
       </Header>
       <Content>
-        <Verso>{verso}</Verso>
-        <Devocional numberOfLines={10}>{conteudo}</Devocional>
+        {video ? (
+          <VideoPlayer video={video} />
+        ) : (
+          <>
+            <Verso>{verso}</Verso>
+            <Devocional numberOfLines={10}>{conteudo}</Devocional>
+          </>
+        )}
       </Content>
       <Footer>
         <ActionContainer>
-          <LikeText>26</LikeText>
+          <LikeText>{likes.length}</LikeText>
           <MaterialIcons name="favorite-outline" size={18} color="#e80d0d" />
         </ActionContainer>
         <ActionContainer>
-          <CommentText>26</CommentText>
+          <CommentText>{comentarios.length}</CommentText>
           <FontAwesome name="commenting-o" size={18} color="black" />
         </ActionContainer>
       </Footer>

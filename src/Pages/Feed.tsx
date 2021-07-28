@@ -8,7 +8,7 @@ import api from "../Services/api";
 
 const FeedContainer = styled.SafeAreaView`
   flex: 1;
-  background-color: #b1d2d6;
+  background-color: #127c82;
 `;
 
 type TabParamList = {

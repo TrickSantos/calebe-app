@@ -54,4 +54,21 @@ export interface IDevocional {
   conteudo: string;
   liberacao: string;
   autor: IUsuario;
+  comentarios: IComentario[];
+  likes: ILike[];
+}
+
+export interface ILike {
+  id: number;
+  devocionalId: number;
+  userId: number;
+  usuario: IUsuario;
+}
+
+export interface IComentario {
+  id: number;
+  devocionalId: number;
+  userId: number;
+  comentario: string;
+  usuario: IUsuario;
 }
