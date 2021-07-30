@@ -1,15 +1,15 @@
 self.__precacheManifest = [
   {
-    "revision": "fd72112905a36121913b",
-    "url": "/static/js/app.104b9be9.chunk.js"
+    "revision": "306c8965564be5ee5cdd",
+    "url": "/static/js/app.15142fc6.chunk.js"
   },
   {
     "revision": "e91487e8c8aa62ce91ce",
     "url": "/static/js/runtime~app.34c76111.js"
   },
   {
-    "revision": "d2de0708e17aa8795ad4",
-    "url": "/static/js/2.d9eedfa8.chunk.js"
+    "revision": "fe07d2f83744965df3ca",
+    "url": "/static/js/2.11d51824.chunk.js"
   },
   {
     "revision": "6a2ddad1092a0a1c326b6d0e738e682b",
@@ -20,16 +20,12 @@ self.__precacheManifest = [
     "url": "/./fonts/MaterialIcons.ttf"
   },
   {
-    "revision": "b06871f281fee6b241d60582ae9369b9",
-    "url": "/./fonts/FontAwesome.ttf"
+    "revision": "3a2ba31570920eeb9b1d217cabe58315",
+    "url": "/./fonts/AntDesign.ttf"
   },
   {
     "revision": "e766963327e0a89f9ec2ba88646b6177",
     "url": "/./fonts/Feather.ttf"
-  },
-  {
-    "revision": "3a2ba31570920eeb9b1d217cabe58315",
-    "url": "/./fonts/AntDesign.ttf"
   },
   {
     "revision": "3e8e158cdebe5a866d2a4fc9aac7cf45",
@@ -54,6 +50,10 @@ self.__precacheManifest = [
   {
     "revision": "744ce60078c17d86006dd0edabcd59a7",
     "url": "/./fonts/Entypo.ttf"
+  },
+  {
+    "revision": "b06871f281fee6b241d60582ae9369b9",
+    "url": "/./fonts/FontAwesome.ttf"
   },
   {
     "revision": "b49ae8ab2dbccb02c4d11caaacf09eab",
@@ -88,7 +88,7 @@ self.__precacheManifest = [
     "url": "/favicon.ico"
   },
   {
-    "revision": "e7fe33b423bdf976d7d683b977d9b705",
+    "revision": "9500618596302a613646794bd594ab98",
     "url": "/index.html"
   },
   {

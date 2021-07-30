@@ -10,6 +10,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Editar from "../Pages/Editar";
 import Equipe from "../Pages/Equipe";
 import EditarEquipe from "../Pages/EditarEquipe";
+import Devocional from "../Pages/Devocional";
+import { IDevocional } from "../../declarations";
 
 export type RankingStackParamList = {
   Ranking: undefined;
@@ -30,11 +32,33 @@ export type ConfigStackParamList = {
   Editar: undefined;
 };
 
+export type FeedStackParamList = {
+  Feed: undefined;
+  Devocional: IDevocional;
+};
+
 const Tab = createBottomTabNavigator();
 
 const ConfigStack = createStackNavigator();
 
 const RankingStack = createStackNavigator();
+
+const FeedStack = createStackNavigator();
+
+const FeedRoutes = () => (
+  <FeedStack.Navigator initialRouteName="Feed">
+    <FeedStack.Screen
+      name="Feed"
+      component={Feed}
+      options={{ headerShown: false }}
+    />
+    <FeedStack.Screen
+      name="Devocional"
+      component={Devocional}
+      options={{ headerShown: false }}
+    />
+  </FeedStack.Navigator>
+);
 
 const RankingRoutes = () => (
   <RankingStack.Navigator initialRouteName="Ranking">
@@ -79,16 +103,11 @@ const AppRoutes: React.FC = () => {
         showLabel: false,
         activeTintColor: "#127C82",
         inactiveTintColor: "#000",
-        style: {
-          backgroundColor: "#FFF",
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
-        },
       }}
     >
       <Tab.Screen
         name="Home"
-        component={Feed}
+        component={FeedRoutes}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name="home" size={size} color={color} />

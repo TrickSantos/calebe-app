@@ -1,45 +1,36 @@
-import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import React, { useEffect, useState } from "react";
-import { FlatList } from "react-native";
+import { FlatList, ListRenderItem } from "react-native";
 import styled from "styled-components/native";
 import { IDevocional } from "../../declarations";
 import Post from "../Components/Post";
 import api from "../Services/api";
+import { StackScreenProps } from "@react-navigation/stack";
+import { FeedStackParamList } from "../Routes/app.routes";
+import { ActivityIndicator } from "react-native-paper";
 
 const FeedContainer = styled.SafeAreaView`
   flex: 1;
   background-color: #127c82;
 `;
 
-type TabParamList = {
-  Home: undefined;
-  Ranking: undefined;
-  Desafios: undefined;
-  Configs: undefined;
-};
+type Props = StackScreenProps<FeedStackParamList, "Feed">;
 
-export enum Screens {
-  HOME = "Home",
-  RANKING = "Ranking",
-  DESAFIOS = "Desafios",
-  CONFIGS = "Configs",
-}
-
-export interface TabBarProps {
-  navigation: BottomTabNavigationProp<TabParamList, Screens>;
-}
-
-const Feed = ({ navigation }: TabBarProps) => {
+const Feed = ({ navigation }: Props) => {
   const [posts, setPosts] = useState<IDevocional[]>([] as IDevocional[]);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(0);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getPosts() {
       try {
         setLoading(true);
-        await api.get("/devocional").then(({ data }) => {
-          setPosts(data);
-        });
+        await api
+          .get(`/devocional?status=true&page=${page}`)
+          .then(({ data }) => {
+            setPosts(posts.concat(data.data));
+            setPageSize(data.meta.lastPage);
+          });
       } catch (error) {
         console.log(error);
       } finally {
@@ -47,15 +38,17 @@ const Feed = ({ navigation }: TabBarProps) => {
       }
     }
     getPosts();
-  }, []);
+  }, [page]);
 
   useEffect(() => {
     navigation.addListener("focus", async () => {
       try {
         setLoading(true);
-        await api.get("/devocional").then(({ data }) => {
-          setPosts(data);
-        });
+        await api
+          .get(`/devocional?status=true&page=${page}`)
+          .then(({ data }) => {
+            setPosts(data.data);
+          });
       } catch (error) {
         console.log(error);
       } finally {
@@ -64,14 +57,25 @@ const Feed = ({ navigation }: TabBarProps) => {
     });
   }, []);
 
+  const loadMore = () => {
+    if (pageSize > page) {
+      setPage(page + 1);
+    }
+  };
+
   return (
     <FeedContainer>
       <FlatList
         data={posts}
         style={{ paddingHorizontal: 20 }}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={Post}
+        renderItem={({ item }) => <Post post={item} />}
         refreshing={loading}
+        ListFooterComponent={() =>
+          loading ? <ActivityIndicator size="large" color="#fff" /> : null
+        }
+        onEndReachedThreshold={0.1}
+        onEndReached={loadMore}
       />
     </FeedContainer>
   );

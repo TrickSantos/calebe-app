@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { ListRenderItem } from "react-native";
+import React, { useState } from "react";
 import styled from "styled-components/native";
 import { IDevocional } from "../../declarations";
-import { FontAwesome5, FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome5, AntDesign, MaterialIcons } from "@expo/vector-icons";
 import VideoPlayer from "./VideoPlayer";
+import { useAuth } from "../Context/AuthContext";
+import api from "../Services/api";
+import { useNavigation } from "@react-navigation/native";
+import { Image } from "react-native";
 
 const Container = styled.View`
   background-color: #ffffff;
@@ -11,7 +14,7 @@ const Container = styled.View`
   border-radius: 20px;
 `;
 
-const Header = styled.View`
+const Header = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -20,7 +23,7 @@ const Header = styled.View`
   border-bottom-width: 1px;
 `;
 
-const Content = styled.View`
+const Content = styled.TouchableOpacity`
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -95,9 +98,36 @@ const ActionContainer = styled.TouchableOpacity`
   margin: 0 5px;
 `;
 
-const Post: ListRenderItem<IDevocional> = ({
-  item: { verso, conteudo, titulo, autor, video, comentarios, likes },
-}) => {
+interface Props {
+  post: IDevocional;
+}
+
+const Post = ({ post }: Props) => {
+  const { user } = useAuth();
+  const navigation = useNavigation();
+  const [curtidas, setCurtidas] = useState(post.likes.length);
+  const [comments, setComments] = useState(post.comentarios.length);
+  const [liked, setLiked] = useState(
+    post.likes.some((el) => el.userId === user?.id)
+  );
+
+  const handleCurtir = async () => {
+    await api.put(`/curtir/${post.id}`).then(({ data }) => {
+      const { likes, comentarios }: IDevocional = data;
+      setCurtidas(likes.length);
+      setComments(comentarios.length);
+      setLiked(likes.some((el) => el.userId === user?.id));
+    });
+  };
+  const handleUnlike = async () => {
+    await api.delete(`/curtida/${post.id}`).then(({ data }) => {
+      const { likes, comentarios }: IDevocional = data;
+      setCurtidas(likes.length);
+      setComments(comentarios.length);
+      setLiked(likes.some((el) => el.userId === user?.id));
+    });
+  };
+
   return (
     <Container
       style={{
@@ -112,34 +142,45 @@ const Post: ListRenderItem<IDevocional> = ({
         elevation: 3,
       }}
     >
-      <Header>
-        {autor.avatar ? (
-          <Avatar source={{ uri: autor.avatar }} />
+      <Header onPress={() => navigation.navigate("Devocional", post)}>
+        {post.autor.avatar ? (
+          <Avatar source={{ uri: post.autor.avatar }} />
         ) : (
           <NullAvatar>
             <FontAwesome5 name="user" size={16} color="black" />
           </NullAvatar>
         )}
-        <Titulo>{titulo}</Titulo>
+        <Titulo>{post.titulo}</Titulo>
       </Header>
-      <Content>
-        {video ? (
-          <VideoPlayer video={video} />
+      <Content onPress={() => navigation.navigate("Devocional", post)}>
+        {post.video ? (
+          <VideoPlayer video={post.video} />
         ) : (
           <>
-            <Verso>{verso}</Verso>
-            <Devocional numberOfLines={10}>{conteudo}</Devocional>
+            <Verso>{post.verso}</Verso>
+            {post.cover ? (
+              <Image
+                source={{ uri: post.cover }}
+                resizeMode="contain"
+                style={{ width: "100%", height: 250 }}
+              />
+            ) : null}
+            <Devocional numberOfLines={10}>{post.conteudo}</Devocional>
           </>
         )}
       </Content>
       <Footer>
-        <ActionContainer>
-          <LikeText>{likes.length}</LikeText>
-          <MaterialIcons name="favorite-outline" size={18} color="#e80d0d" />
+        <ActionContainer onPress={liked ? handleUnlike : handleCurtir}>
+          <LikeText>{curtidas}</LikeText>
+          {liked ? (
+            <MaterialIcons name="favorite" size={18} color="#e80d0d" />
+          ) : (
+            <MaterialIcons name="favorite-outline" size={18} color="#e80d0d" />
+          )}
         </ActionContainer>
         <ActionContainer>
-          <CommentText>{comentarios.length}</CommentText>
-          <FontAwesome name="commenting-o" size={18} color="black" />
+          <CommentText>{comments}</CommentText>
+          <AntDesign name="message1" size={18} color="black" />
         </ActionContainer>
       </Footer>
     </Container>

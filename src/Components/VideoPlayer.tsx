@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Video } from "expo-av";
 
 interface Props {
@@ -6,19 +6,16 @@ interface Props {
 }
 
 const VideoPlayer = ({ video }: Props) => {
-  const videoRef = useRef(null);
+  const videoRef = useRef<Video>(null);
 
   return (
     <Video
       ref={videoRef}
-      source={{
-        uri: video,
-      }}
+      source={{ uri: video }}
       useNativeControls
       resizeMode="contain"
-      isLooping
+      style={{ width: "100%" }}
     />
   );
 };
-
 export default VideoPlayer;
