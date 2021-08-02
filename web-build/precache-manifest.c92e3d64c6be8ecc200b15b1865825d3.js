@@ -1,15 +1,15 @@
 self.__precacheManifest = [
   {
-    "revision": "306c8965564be5ee5cdd",
-    "url": "/static/js/app.15142fc6.chunk.js"
+    "revision": "1d2fe876d63fd4cfa8f8",
+    "url": "/static/js/app.cd25ef05.chunk.js"
   },
   {
     "revision": "e91487e8c8aa62ce91ce",
     "url": "/static/js/runtime~app.34c76111.js"
   },
   {
-    "revision": "fe07d2f83744965df3ca",
-    "url": "/static/js/2.11d51824.chunk.js"
+    "revision": "77276804f9bc9c890c67",
+    "url": "/static/js/2.4388f31e.chunk.js"
   },
   {
     "revision": "6a2ddad1092a0a1c326b6d0e738e682b",
@@ -28,8 +28,12 @@ self.__precacheManifest = [
     "url": "/./fonts/Feather.ttf"
   },
   {
-    "revision": "3e8e158cdebe5a866d2a4fc9aac7cf45",
-    "url": "/static/media/calebe.3e8e158c.png"
+    "revision": "744ce60078c17d86006dd0edabcd59a7",
+    "url": "/./fonts/Entypo.ttf"
+  },
+  {
+    "revision": "fffe9f1a8a1e833eebbd16fb737cd4d4",
+    "url": "/static/media/new.fffe9f1a.png"
   },
   {
     "revision": "d2285965fe34b05465047401b8595dd0",
@@ -46,10 +50,6 @@ self.__precacheManifest = [
   {
     "revision": "8b6af8e5e8324edfd77af8b3b35d7f9c",
     "url": "/./fonts/Poppins.ttf"
-  },
-  {
-    "revision": "744ce60078c17d86006dd0edabcd59a7",
-    "url": "/./fonts/Entypo.ttf"
   },
   {
     "revision": "b06871f281fee6b241d60582ae9369b9",
@@ -76,19 +76,19 @@ self.__precacheManifest = [
     "url": "/expo-service-worker.js"
   },
   {
-    "revision": "c6f0be0de9f093ba8443a8ebb2ca7106",
+    "revision": "760fe5aea3ee0eb2715cd11383e37c7a",
     "url": "/favicon-16.png"
   },
   {
-    "revision": "e7ebb3f48de343d4512d4bedf457fd51",
+    "revision": "f9d0c3427a2faf65c576744cd9318409",
     "url": "/favicon-32.png"
   },
   {
-    "revision": "592e7b8d95c21d24dcb7fd855ab8cda6",
+    "revision": "e0d6035c1af795809411d09b7d3ff848",
     "url": "/favicon.ico"
   },
   {
-    "revision": "9500618596302a613646794bd594ab98",
+    "revision": "44d58486fea35982f27168c11f296a14",
     "url": "/index.html"
   },
   {

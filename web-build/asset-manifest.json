@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/static/js/app.15142fc6.chunk.js",
-    "app.js.map": "/static/js/app.15142fc6.chunk.js.map",
+    "app.js": "/static/js/app.cd25ef05.chunk.js",
+    "app.js.map": "/static/js/app.cd25ef05.chunk.js.map",
     "runtime~app.js": "/static/js/runtime~app.34c76111.js",
     "runtime~app.js.map": "/static/js/runtime~app.34c76111.js.map",
-    "static/js/2.11d51824.chunk.js": "/static/js/2.11d51824.chunk.js",
-    "static/js/2.11d51824.chunk.js.map": "/static/js/2.11d51824.chunk.js.map",
+    "static/js/2.4388f31e.chunk.js": "/static/js/2.4388f31e.chunk.js",
+    "static/js/2.4388f31e.chunk.js.map": "/static/js/2.4388f31e.chunk.js.map",
     "fonts/AntDesign.ttf": "/./fonts/AntDesign.ttf",
     "fonts/Entypo.ttf": "/./fonts/Entypo.ttf",
     "fonts/Feather.ttf": "/./fonts/Feather.ttf",
@@ -25,11 +25,11 @@
     "index.html": "/index.html",
     "manifest.json": "/manifest.json",
     "serve.json": "/serve.json",
-    "static/media/calebe.png": "/static/media/calebe.3e8e158c.png"
+    "static/media/new.png": "/static/media/new.fffe9f1a.png"
   },
   "entrypoints": [
     "static/js/runtime~app.34c76111.js",
-    "static/js/2.11d51824.chunk.js",
-    "static/js/app.15142fc6.chunk.js"
+    "static/js/2.4388f31e.chunk.js",
+    "static/js/app.cd25ef05.chunk.js"
   ]
 }

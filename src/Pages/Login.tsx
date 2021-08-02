@@ -3,7 +3,7 @@ import { Image } from "react-native";
 import { Feather, SimpleLineIcons } from "@expo/vector-icons";
 import { Controller, useForm } from "react-hook-form";
 import styled from "styled-components/native";
-import logo from "../../assets/calebe.png";
+import logo from "../../assets/new.png";
 import { StackScreenProps } from "@react-navigation/stack";
 import { useAuth } from "../Context/AuthContext";
 import api from "../Services/api";
@@ -125,7 +125,7 @@ function Login({ navigation }: Props) {
       <Logo>
         <Image
           source={logo}
-          style={{ width: 350, height: 200 }}
+          style={{ width: 350, height: 250 }}
           resizeMode="contain"
         />
         <Text>{recuperar ? "Recuperar senha" : "Bem vindo!"}</Text>

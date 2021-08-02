@@ -1,5 +1,5 @@
 import React from "react";
-import { Feather } from "@expo/vector-icons";
+import { Feather, Entypo } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Desafios from "../Pages/Desafios";
@@ -110,7 +110,7 @@ const AppRoutes: React.FC = () => {
         component={FeedRoutes}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Feather name="home" size={size} color={color} />
+            <Entypo name="open-book" size={size} color={color} />
           ),
         }}
       />

@@ -148,7 +148,7 @@ const Editar = ({ navigation }: Props) => {
             size={90}
           />
         </ClickButton>
-        <NomeText>Patrick</NomeText>
+        <NomeText>{user?.nome}</NomeText>
         <InfoText>Editar Perfil</InfoText>
       </PerfilContainer>
       <FormContainer>
