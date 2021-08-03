@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Feather, AntDesign } from "@expo/vector-icons";
 import { ActivityIndicator, Avatar } from "react-native-paper";
 import styled from "styled-components/native";
-import { useAuth } from "../Context/AuthContext";
+import { useAuth } from "../../Context/AuthContext";
 import { StackScreenProps } from "@react-navigation/stack";
 
 const Container = styled.View`

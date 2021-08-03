@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, ListRenderItem } from "react-native";
 import styled from "styled-components/native";
-import { IDevocional } from "../../declarations";
-import Post from "../Components/Post";
-import api from "../Services/api";
+import { IDevocional } from "../../../declarations";
+import Post from "../../Components/Post";
+import api from "../../Services/api";
 import { StackScreenProps } from "@react-navigation/stack";
-import { FeedStackParamList } from "../Routes/app.routes";
 import { ActivityIndicator } from "react-native-paper";
+import { FeedStackParamList } from "../../Routes/feed.routes";
 
 const FeedContainer = styled.SafeAreaView`
   flex: 1;

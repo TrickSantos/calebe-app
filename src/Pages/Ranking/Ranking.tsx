@@ -3,132 +3,10 @@ import styled from "styled-components/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { ActivityIndicator, Avatar } from "react-native-paper";
 import { StyleSheet } from "react-native";
-import { IEquipe } from "../../declarations";
-import api from "../Services/api";
+import { IEquipe } from "../../../declarations";
+import api from "../../Services/api";
 import { StackScreenProps } from "@react-navigation/stack";
-import { RankingStackParamList } from "../Routes/app.routes";
-
-const Container = styled.View`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #127c82;
-`;
-
-const Scroll = styled.ScrollView``;
-
-const Text = styled.Text`
-  color: white;
-  font-family: "Poppins";
-  font-size: 18px;
-  font-weight: 500;
-  margin: 1rem 0;
-`;
-
-const Posicao = styled.Text`
-  color: white;
-  font-family: "Poppins";
-  font-size: 14px;
-`;
-
-const Equipe = styled.Text`
-  color: white;
-  font-family: "Poppins";
-  font-size: 14px;
-`;
-
-const Colocacao = styled.View`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-`;
-
-const Pontuacao = styled.Text`
-  font-family: "Poppins";
-  font-weight: 500;
-  color: #5ceaa0;
-  font-size: 18px;
-`;
-
-const PrimeiroContainer = styled.View`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-`;
-
-const RankingContainer = styled.View`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 1rem;
-`;
-
-const Row = styled.View`
-  display: flex;
-  flex-direction: row;
-`;
-
-const EquipeContainer = styled.TouchableOpacity`
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  background: #5ea6a9;
-  border-radius: 30px;
-  padding-right: 1rem;
-`;
-
-const PosicaoAvatar = styled.View`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0.5rem;
-`;
-
-const ColocacaoContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  padding: 0 1rem;
-  margin-top: -120px;
-  width: 100%;
-`;
-
-const style = StyleSheet.create({
-  shadowRanking: {
-    borderColor: "#5CEAA0",
-    borderWidth: 2,
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowColor: "#5CEAA0",
-    shadowOpacity: 1.0,
-    shadowRadius: 20,
-  },
-  shadow: {
-    marginVertical: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    elevation: 4,
-  },
-  avatarBg: {
-    backgroundColor: "#5ea6a9",
-  },
-});
+import { RankingStackParamList } from "../../Routes/ranking.routes";
 
 type Props = StackScreenProps<RankingStackParamList, "Ranking">;
 
@@ -279,5 +157,127 @@ const Ranking = ({ navigation }: Props) => {
     </Container>
   );
 };
+
+const Container = styled.View`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #127c82;
+`;
+
+const Scroll = styled.ScrollView``;
+
+const Text = styled.Text`
+  color: white;
+  font-family: "Poppins";
+  font-size: 18px;
+  font-weight: 500;
+  margin: 1rem 0;
+`;
+
+const Posicao = styled.Text`
+  color: white;
+  font-family: "Poppins";
+  font-size: 14px;
+`;
+
+const Equipe = styled.Text`
+  color: white;
+  font-family: "Poppins";
+  font-size: 14px;
+`;
+
+const Colocacao = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+`;
+
+const Pontuacao = styled.Text`
+  font-family: "Poppins";
+  font-weight: 500;
+  color: #5ceaa0;
+  font-size: 18px;
+`;
+
+const PrimeiroContainer = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`;
+
+const RankingContainer = styled.View`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem;
+`;
+
+const Row = styled.View`
+  display: flex;
+  flex-direction: row;
+`;
+
+const EquipeContainer = styled.TouchableOpacity`
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: #5ea6a9;
+  border-radius: 30px;
+  padding-right: 1rem;
+`;
+
+const PosicaoAvatar = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+`;
+
+const ColocacaoContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 1rem;
+  margin-top: -120px;
+  width: 100%;
+`;
+
+const style = StyleSheet.create({
+  shadowRanking: {
+    borderColor: "#5CEAA0",
+    borderWidth: 2,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowColor: "#5CEAA0",
+    shadowOpacity: 1.0,
+    shadowRadius: 20,
+  },
+  shadow: {
+    marginVertical: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 4,
+  },
+  avatarBg: {
+    backgroundColor: "#5ea6a9",
+  },
+});
 
 export default Ranking;

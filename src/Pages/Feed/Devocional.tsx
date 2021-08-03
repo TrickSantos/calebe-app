@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
-import { Input } from "../Components";
+import { Input } from "../../Components";
 import { Avatar, Snackbar } from "react-native-paper";
 import { StackScreenProps } from "@react-navigation/stack";
-import { FeedStackParamList } from "../Routes/app.routes";
-import VideoPlayer from "../Components/VideoPlayer";
-import api from "../Services/api";
+import VideoPlayer from "../../Components/VideoPlayer";
+import api from "../../Services/api";
 import { AxiosError } from "axios";
 import { Image } from "react-native";
+import { FeedStackParamList } from "../../Routes/feed.routes";
 
 type Props = StackScreenProps<FeedStackParamList, "Devocional">;
 const Devocional = ({ navigation, route }: Props) => {

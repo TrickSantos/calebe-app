@@ -12,13 +12,11 @@ import {
   FormItem,
   Input,
   Label,
-} from "../Components";
-import { useAuth } from "../Context/AuthContext";
-import api from "../Services/api";
+} from "../../Components";
+import { useAuth } from "../../Context/AuthContext";
+import api from "../../Services/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { IUsuario } from "../../declarations";
-import { RankingStackParamList } from "../Routes/app.routes";
-import { StyleSheet } from "react-native";
+import { IUsuario } from "../../../declarations";
 
 const Container = styled.View`
   flex: 1;
@@ -68,38 +66,15 @@ const Action = styled.View`
 `;
 const ClickButton = styled.TouchableOpacity``;
 
-const style = StyleSheet.create({
-  shadowRanking: {
-    borderColor: "#5CEAA0",
-    borderWidth: 2,
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowColor: "#5CEAA0",
-    shadowOpacity: 1.0,
-    shadowRadius: 20,
-  },
-  shadow: {
-    marginVertical: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    elevation: 4,
-  },
-  avatarBg: {
-    backgroundColor: "#5ea6a9",
-  },
-});
+type RootStackParamList = {
+  Configuracao: undefined;
+  Editar: undefined;
+};
 
-type Props = StackScreenProps<RankingStackParamList, "Editar">;
+type Props = StackScreenProps<RootStackParamList, "Configuracao">;
 
-const EditarEquipe = ({ navigation, route: { params } }: Props) => {
-  const [foto, setFoto] = useState(params.avatar);
+const Editar = ({ navigation }: Props) => {
+  const { user, setUser } = useAuth();
   const { control, handleSubmit } = useForm();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -127,9 +102,10 @@ const EditarEquipe = ({ navigation, route: { params } }: Props) => {
         const form = new FormData();
         form.append("avatar", blob);
         await api
-          .put(`/equipe/${params.id}`, form)
+          .put(`/usuario/${user?.id}`, form)
           .then(async ({ data }) => {
-            setFoto(data.avatar);
+            setUser(data);
+            await AsyncStorage.setItem("auth:user", JSON.stringify(data));
             setDisplay(true);
             setMessage("Foto atualizada com sucesso!");
           })
@@ -140,11 +116,13 @@ const EditarEquipe = ({ navigation, route: { params } }: Props) => {
   const onSubmit = async (data: IUsuario) => {
     setLoading(true);
     await api
-      .put(`/equipe/${params.id}`, data)
-      .then(async () => {
+      .put(`/usuario/${user?.id}`, data)
+      .then(async ({ data }) => {
+        setUser(data);
+        await AsyncStorage.setItem("auth:user", JSON.stringify(data));
         setDisplay(true);
         setMessage("Dados atualizados com sucesso!");
-        navigation.goBack();
+        navigation.replace("Configuracao");
       })
       .catch((e) => {
         console.log(e);
@@ -157,24 +135,20 @@ const EditarEquipe = ({ navigation, route: { params } }: Props) => {
   return (
     <Container>
       <Action>
-        <ClickButton onPress={() => navigation.goBack()}>
+        <ClickButton onPress={() => navigation.replace("Configuracao")}>
           <AntDesign name="arrowleft" size={24} color="#127c82" />
         </ClickButton>
       </Action>
       <PerfilContainer>
         <ClickButton onPress={openImagePickerAsync}>
-          {foto ? (
-            <Avatar.Image
-              source={{
-                uri: foto,
-              }}
-              size={90}
-            />
-          ) : (
-            <Avatar.Icon style={style.avatarBg} icon="account" size={90} />
-          )}
+          <Avatar.Image
+            source={{
+              uri: user?.avatar,
+            }}
+            size={90}
+          />
         </ClickButton>
-        <NomeText>{params.nome}</NomeText>
+        <NomeText>{user?.nome}</NomeText>
         <InfoText>Editar Perfil</InfoText>
       </PerfilContainer>
       <FormContainer>
@@ -183,7 +157,7 @@ const EditarEquipe = ({ navigation, route: { params } }: Props) => {
           <Controller
             name="nome"
             control={control}
-            defaultValue={params.nome}
+            defaultValue={user?.nome}
             render={({ field: { value, onBlur, onChange } }) => (
               <Input
                 placeholderTextColor="#127C82"
@@ -198,13 +172,38 @@ const EditarEquipe = ({ navigation, route: { params } }: Props) => {
         <FormItem>
           <Label>Email</Label>
           <Controller
-            name="instagram"
+            name="email"
             control={control}
-            defaultValue={params.instagram}
+            defaultValue={user?.email}
+            rules={{
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: "Entre com um email válido",
+              },
+            }}
             render={({ field: { value, onBlur, onChange } }) => (
               <Input
+                autoCompleteType="email"
                 placeholderTextColor="#127C82"
-                placeholder="Instagram"
+                placeholder="Email"
+                onChange={onChange}
+                value={value}
+                onBlur={onBlur}
+              />
+            )}
+          />
+        </FormItem>
+        <FormItem>
+          <Label>Senha</Label>
+          <Controller
+            name="password"
+            control={control}
+            render={({ field: { value, onBlur, onChange } }) => (
+              <Input
+                autoCompleteType="password"
+                secureTextEntry
+                placeholderTextColor="#127C82"
+                placeholder="Senha"
                 onChange={onChange}
                 value={value}
                 onBlur={onBlur}
@@ -249,4 +248,4 @@ const EditarEquipe = ({ navigation, route: { params } }: Props) => {
   );
 };
 
-export default EditarEquipe;
+export default Editar;

@@ -1,12 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import api from "../../Services/api";
 import { StyleSheet } from "react-native";
-import { Avatar } from "react-native-paper";
-import { Feather, MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components/native";
-import { useAuth } from "../Context/AuthContext";
+import { IDesafio } from "../../../declarations";
+import { useAuth } from "../../Context/AuthContext";
+import { StackScreenProps } from "@react-navigation/stack";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
+import { ActivityIndicator, Avatar } from "react-native-paper";
+import { DesafiosStackParamsList } from "../../Routes/desafios.routes";
 
-const Desafios = () => {
+type Props = StackScreenProps<DesafiosStackParamsList, "Desafios">;
+const Desafios = ({ navigation }: Props) => {
   const { user } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const [desafios, setDesafios] = useState<IDesafio[]>([] as IDesafio[]);
+
+  useEffect(() => {
+    navigation.addListener("focus", async () => {
+      setLoading(true);
+      await api
+        .get(`/desafio?equipeId=${user?.equipeId}`)
+        .then(({ data }) => {
+          setDesafios(data);
+        })
+        .catch((e) => console.log(e))
+        .finally(() => setLoading(false));
+    });
+  }, []);
+
   return (
     <Container>
       <Text>Desafios</Text>
@@ -23,24 +44,30 @@ const Desafios = () => {
         <Equipe>{user?.equipe.nome}</Equipe>
         <Pontuacao>0</Pontuacao>
       </EquipeContainer>
+      {loading && (
+        <ActivityIndicator size="large" color="#FFF" animating={true} />
+      )}
       <DesafiosContainer>
-        {/* <Row>
-          <Desafio style={style.shadow}>
-            <Feather
-              name="award"
-              size={20}
-              style={{ margin: "1rem" }}
-              color="#127c82"
-            />
-            <Titulo>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </Titulo>
-            <Tag>
-              <Valor>+ 100</Valor>
-            </Tag>
-            <MaterialIcons name="arrow-right" size={28} color="#5CEAA0" />
-          </Desafio>
-        </Row> */}
+        {desafios.map((desafio) => (
+          <Row key={desafio.id}>
+            <Desafio
+              style={style.shadow}
+              onPress={() => navigation.navigate("Desafio", desafio)}
+            >
+              <Feather
+                name="award"
+                size={20}
+                style={{ margin: "1rem" }}
+                color="#127c82"
+              />
+              <Titulo>{desafio.titulo}</Titulo>
+              <Tag>
+                <Valor>+ {desafio.pontos}</Valor>
+              </Tag>
+              <MaterialIcons name="arrow-right" size={28} color="#5CEAA0" />
+            </Desafio>
+          </Row>
+        ))}
       </DesafiosContainer>
     </Container>
   );
@@ -119,7 +146,7 @@ const Row = styled.View`
   flex-direction: row;
 `;
 
-const DesafiosContainer = styled.View`
+const DesafiosContainer = styled.ScrollView`
   display: flex;
   flex-direction: column;
   width: 100%;

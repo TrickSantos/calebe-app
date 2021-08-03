@@ -1,19 +1,23 @@
 self.__precacheManifest = [
   {
-    "revision": "1d2fe876d63fd4cfa8f8",
-    "url": "/static/js/app.cd25ef05.chunk.js"
+    "revision": "5e733218f7b7c7b4f8de",
+    "url": "/static/js/app.1c6ab105.chunk.js"
   },
   {
     "revision": "e91487e8c8aa62ce91ce",
     "url": "/static/js/runtime~app.34c76111.js"
   },
   {
-    "revision": "77276804f9bc9c890c67",
-    "url": "/static/js/2.4388f31e.chunk.js"
+    "revision": "aa03a777c12576d78d84",
+    "url": "/static/js/2.a4165121.chunk.js"
   },
   {
     "revision": "6a2ddad1092a0a1c326b6d0e738e682b",
     "url": "/./fonts/MaterialCommunityIcons.ttf"
+  },
+  {
+    "revision": "e766963327e0a89f9ec2ba88646b6177",
+    "url": "/./fonts/Feather.ttf"
   },
   {
     "revision": "8ef52a15e44481b41e7db3c7eaf9bb83",
@@ -24,12 +28,12 @@ self.__precacheManifest = [
     "url": "/./fonts/AntDesign.ttf"
   },
   {
-    "revision": "e766963327e0a89f9ec2ba88646b6177",
-    "url": "/./fonts/Feather.ttf"
-  },
-  {
     "revision": "744ce60078c17d86006dd0edabcd59a7",
     "url": "/./fonts/Entypo.ttf"
+  },
+  {
+    "revision": "b3263095df30cb7db78c613e73f9499a",
+    "url": "/./fonts/Ionicons.ttf"
   },
   {
     "revision": "fffe9f1a8a1e833eebbd16fb737cd4d4",
@@ -64,10 +68,6 @@ self.__precacheManifest = [
     "url": "/./fonts/Foundation.ttf"
   },
   {
-    "revision": "b3263095df30cb7db78c613e73f9499a",
-    "url": "/./fonts/Ionicons.ttf"
-  },
-  {
     "revision": "d0c694b562b2208635f250762cd7fc79",
     "url": "/serve.json"
   },
@@ -88,7 +88,7 @@ self.__precacheManifest = [
     "url": "/favicon.ico"
   },
   {
-    "revision": "44d58486fea35982f27168c11f296a14",
+    "revision": "7a3f9264be1485b0842ed94f90993c70",
     "url": "/index.html"
   },
   {
