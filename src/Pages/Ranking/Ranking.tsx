@@ -18,12 +18,13 @@ const Ranking = ({ navigation }: Props) => {
   const [terceiro, setTerceiro] = useState<IEquipe | undefined>(undefined);
 
   useEffect(() => {
-    async function getEquipes() {
+    navigation.addListener("focus", async () => {
       setLoading(true);
       await api
-        .get("/equipe")
+        .get("/equipe?ranking=true")
         .then(({ data }) => {
           let temp: IEquipe[] = data;
+          temp.sort((a, b) => b.pontos - a.pontos);
           if (temp.length > 3) {
             setPrimeiro(temp.shift());
             setSegundo(temp.shift());
@@ -33,8 +34,7 @@ const Ranking = ({ navigation }: Props) => {
         })
         .catch((e) => console.log(e))
         .finally(() => setLoading(false));
-    }
-    getEquipes();
+    });
   }, []);
 
   return (
@@ -49,7 +49,11 @@ const Ranking = ({ navigation }: Props) => {
           {primeiro && segundo && terceiro && (
             <>
               <PrimeiroContainer>
-                <PosicaoAvatar>
+                <PosicaoAvatar
+                  onPress={() =>
+                    navigation.navigate("Equipe", { id: primeiro.id })
+                  }
+                >
                   <Posicao>1</Posicao>
                   <MaterialCommunityIcons
                     name="crown"
@@ -70,11 +74,15 @@ const Ranking = ({ navigation }: Props) => {
                     />
                   )}
                   <Equipe>{primeiro.nome}</Equipe>
-                  <Pontuacao>0</Pontuacao>
+                  <Pontuacao>{primeiro.pontos}</Pontuacao>
                 </PosicaoAvatar>
               </PrimeiroContainer>
               <ColocacaoContainer>
-                <PosicaoAvatar>
+                <PosicaoAvatar
+                  onPress={() =>
+                    navigation.navigate("Equipe", { id: segundo.id })
+                  }
+                >
                   <Posicao>2</Posicao>
                   <MaterialCommunityIcons
                     name="crown"
@@ -95,9 +103,13 @@ const Ranking = ({ navigation }: Props) => {
                     />
                   )}
                   <Equipe>{segundo.nome}</Equipe>
-                  <Pontuacao>0</Pontuacao>
+                  <Pontuacao>{segundo.pontos}</Pontuacao>
                 </PosicaoAvatar>
-                <PosicaoAvatar>
+                <PosicaoAvatar
+                  onPress={() =>
+                    navigation.navigate("Equipe", { id: terceiro.id })
+                  }
+                >
                   <Posicao>3</Posicao>
                   <MaterialCommunityIcons
                     name="crown"
@@ -118,13 +130,13 @@ const Ranking = ({ navigation }: Props) => {
                     />
                   )}
                   <Posicao>{terceiro.nome}</Posicao>
-                  <Pontuacao>0</Pontuacao>
+                  <Pontuacao>{terceiro.pontos}</Pontuacao>
                 </PosicaoAvatar>
               </ColocacaoContainer>
             </>
           )}
           <RankingContainer>
-            {equipes.map(({ id, avatar, nome }, index) => (
+            {equipes.map(({ id, avatar, nome, pontos }, index) => (
               <Row key={id}>
                 <Colocacao>
                   <Posicao>{index + 1}</Posicao>
@@ -147,7 +159,7 @@ const Ranking = ({ navigation }: Props) => {
                     />
                   )}
                   <Equipe>{nome}</Equipe>
-                  <Pontuacao>0</Pontuacao>
+                  <Pontuacao>{pontos}</Pontuacao>
                 </EquipeContainer>
               </Row>
             ))}
@@ -165,8 +177,6 @@ const Container = styled.View`
   align-items: center;
   background-color: #127c82;
 `;
-
-const Scroll = styled.ScrollView``;
 
 const Text = styled.Text`
   color: white;
@@ -208,10 +218,11 @@ const PrimeiroContainer = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+
+  z-index: 2;
 `;
 
-const RankingContainer = styled.View`
+const RankingContainer = styled.ScrollView`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -234,7 +245,7 @@ const EquipeContainer = styled.TouchableOpacity`
   padding-right: 1rem;
 `;
 
-const PosicaoAvatar = styled.View`
+const PosicaoAvatar = styled.TouchableOpacity`
   display: flex;
   flex-direction: column;
   align-items: center;

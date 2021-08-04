@@ -68,6 +68,7 @@ const Feed = ({ navigation }: Props) => {
       <FlatList
         data={posts}
         style={{ paddingHorizontal: 20 }}
+        showsVerticalScrollIndicator={false}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => <Post post={item} />}
         refreshing={loading}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../../Services/api";
 import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
-import { IDesafio } from "../../../declarations";
+import { IDesafio, IEquipe } from "../../../declarations";
 import { useAuth } from "../../Context/AuthContext";
 import { StackScreenProps } from "@react-navigation/stack";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
@@ -13,11 +13,15 @@ type Props = StackScreenProps<DesafiosStackParamsList, "Desafios">;
 const Desafios = ({ navigation }: Props) => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [equipe, setEquipe] = useState<IEquipe>({} as IEquipe);
   const [desafios, setDesafios] = useState<IDesafio[]>([] as IDesafio[]);
 
   useEffect(() => {
     navigation.addListener("focus", async () => {
       setLoading(true);
+      await api.get(`/equipe/${user?.equipeId}`).then(({ data }) => {
+        setEquipe(data);
+      });
       await api
         .get(`/desafio?equipeId=${user?.equipeId}`)
         .then(({ data }) => {
@@ -32,17 +36,17 @@ const Desafios = ({ navigation }: Props) => {
     <Container>
       <Text>Desafios</Text>
       <EquipeContainer style={style.shadow}>
-        {user?.equipe.avatar ? (
+        {equipe.avatar ? (
           <Avatar.Image
             style={style.shadowRanking}
-            source={{ uri: user?.equipe.avatar }}
+            source={{ uri: equipe.avatar }}
             size={80}
           />
         ) : (
           <Avatar.Icon style={style.shadowRanking} icon="account" size={80} />
         )}
-        <Equipe>{user?.equipe.nome}</Equipe>
-        <Pontuacao>0</Pontuacao>
+        <Equipe>{equipe.nome}</Equipe>
+        <Pontuacao>{equipe.pontos}</Pontuacao>
       </EquipeContainer>
       {loading && (
         <ActivityIndicator size="large" color="#FFF" animating={true} />

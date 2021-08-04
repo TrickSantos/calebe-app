@@ -31,6 +31,8 @@ export interface IEquipe {
   igrejaId: number;
   igreja: IIgreja;
   membros: IUsuario[];
+  pontos: number;
+  meta: { pontuacao: number | null };
 }
 
 export interface IDesafio {
