@@ -17,6 +17,7 @@ import { useAuth } from "../../Context/AuthContext";
 import api from "../../Services/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { IUsuario } from "../../../declarations";
+import { StatusBar } from "expo-status-bar";
 
 const Container = styled.View`
   flex: 1;
@@ -134,6 +135,7 @@ const Editar = ({ navigation }: Props) => {
 
   return (
     <Container>
+      <StatusBar backgroundColor="#f2f2f2" animated />
       <Action>
         <ClickButton onPress={() => navigation.replace("Configuracao")}>
           <AntDesign name="arrowleft" size={24} color="#127c82" />

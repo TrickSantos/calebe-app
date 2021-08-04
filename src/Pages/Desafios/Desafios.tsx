@@ -8,6 +8,7 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { ActivityIndicator, Avatar } from "react-native-paper";
 import { DesafiosStackParamsList } from "../../Routes/desafios.routes";
+import { StatusBar } from "expo-status-bar";
 
 type Props = StackScreenProps<DesafiosStackParamsList, "Desafios">;
 const Desafios = ({ navigation }: Props) => {
@@ -34,6 +35,7 @@ const Desafios = ({ navigation }: Props) => {
 
   return (
     <Container>
+      <StatusBar backgroundColor="#127c82" animated />
       <Text>Desafios</Text>
       <EquipeContainer style={style.shadow}>
         {equipe.avatar ? (

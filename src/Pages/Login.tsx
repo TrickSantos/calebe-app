@@ -53,7 +53,7 @@ const LoginForm = styled.View`
 
 const TextButton = styled.TouchableOpacity`
   width: 100%;
-  height: 40px;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -166,7 +166,7 @@ function Login({ navigation }: Props) {
           />
         </FormItem>
         {!recuperar && (
-          <FormItem style={{ marginBottom: "2.5rem" }}>
+          <FormItem style={{ marginBottom: "2rem" }}>
             <Label>Senha</Label>
 
             <Controller

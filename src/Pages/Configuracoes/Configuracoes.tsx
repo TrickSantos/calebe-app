@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Feather, AntDesign } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
 import { ActivityIndicator, Avatar } from "react-native-paper";
 import styled from "styled-components/native";
 import { useAuth } from "../../Context/AuthContext";
@@ -65,6 +66,7 @@ const Configuracoes = ({ navigation }: Props) => {
 
   return (
     <Container>
+      <StatusBar backgroundColor="#f2f2f2" animated />
       <PerfilContainer>
         <Avatar.Image
           source={{

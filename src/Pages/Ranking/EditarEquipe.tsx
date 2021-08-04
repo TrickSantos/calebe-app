@@ -17,6 +17,7 @@ import api from "../../Services/api";
 import { IUsuario } from "../../../declarations";
 import { StyleSheet } from "react-native";
 import { RankingStackParamList } from "../../Routes/ranking.routes";
+import { StatusBar } from "expo-status-bar";
 
 type Props = StackScreenProps<RankingStackParamList, "Editar">;
 
@@ -78,6 +79,7 @@ const EditarEquipe = ({ navigation, route: { params } }: Props) => {
 
   return (
     <Container>
+      <StatusBar backgroundColor="#127c82" animated />
       <Action>
         <ClickButton onPress={() => navigation.goBack()}>
           <AntDesign name="arrowleft" size={24} color="#127c82" />

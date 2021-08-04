@@ -8,6 +8,7 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { StackScreenProps } from "@react-navigation/stack";
 import { DesafiosStackParamsList } from "../../Routes/desafios.routes";
 import { AxiosError } from "axios";
+import { StatusBar } from "expo-status-bar";
 
 type RespostaType = {
   resposta: string;
@@ -75,6 +76,7 @@ const Resposta = ({ navigation, route: { params } }: Props) => {
 
   return (
     <Container>
+      <StatusBar backgroundColor="#b1d2d6" animated />
       <Action>
         <Click
           style={{ marginRight: "1rem" }}

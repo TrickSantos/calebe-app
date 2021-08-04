@@ -1,5 +1,3 @@
-declare module "*.png";
-
 interface IUsuario {
   id: number;
   nome: string;

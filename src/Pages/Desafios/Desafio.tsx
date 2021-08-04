@@ -6,6 +6,7 @@ import { useAuth } from "../../Context/AuthContext";
 import VideoPlayer from "../../Components/VideoPlayer";
 import { StackScreenProps } from "@react-navigation/stack";
 import { DesafiosStackParamsList } from "../../Routes/desafios.routes";
+import { StatusBar } from "expo-status-bar";
 
 type Props = StackScreenProps<DesafiosStackParamsList, "Desafio">;
 
@@ -14,6 +15,7 @@ const Desafio = ({ navigation, route: { params } }: Props) => {
   const desafioId = params.id;
   return (
     <Scroll>
+      <StatusBar backgroundColor="#127c82" animated />
       <Container>
         <Action>
           <Click

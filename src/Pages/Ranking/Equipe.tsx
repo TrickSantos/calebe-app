@@ -8,6 +8,7 @@ import { StyleSheet } from "react-native";
 import { IEquipe } from "../../../declarations";
 import api from "../../Services/api";
 import { RankingStackParamList } from "../../Routes/ranking.routes";
+import { StatusBar } from "expo-status-bar";
 
 type Props = StackScreenProps<RankingStackParamList, "Equipe">;
 
@@ -37,6 +38,7 @@ const Equipe = ({
 
   return (
     <Container>
+      <StatusBar backgroundColor="#127c82" animated />
       <Action>
         <ClickButton onPress={() => navigation.goBack()}>
           <AntDesign name="arrowleft" size={24} color="#FFF" />

@@ -9,6 +9,7 @@ import api from "../../Services/api";
 import { AxiosError } from "axios";
 import { Image } from "react-native";
 import { FeedStackParamList } from "../../Routes/feed.routes";
+import { StatusBar } from "expo-status-bar";
 
 type Props = StackScreenProps<FeedStackParamList, "Devocional">;
 const Devocional = ({ navigation, route }: Props) => {
@@ -35,6 +36,7 @@ const Devocional = ({ navigation, route }: Props) => {
 
   return (
     <Scroll>
+      <StatusBar backgroundColor="#b1d2d6" animated />
       <Container>
         <Action>
           <Click

@@ -7,6 +7,7 @@ import api from "../../Services/api";
 import { StackScreenProps } from "@react-navigation/stack";
 import { ActivityIndicator } from "react-native-paper";
 import { FeedStackParamList } from "../../Routes/feed.routes";
+import { StatusBar } from "expo-status-bar";
 
 const FeedContainer = styled.SafeAreaView`
   flex: 1;
@@ -65,6 +66,7 @@ const Feed = ({ navigation }: Props) => {
 
   return (
     <FeedContainer>
+      <StatusBar backgroundColor="#127c82" animated />
       <FlatList
         data={posts}
         style={{ paddingHorizontal: 20 }}

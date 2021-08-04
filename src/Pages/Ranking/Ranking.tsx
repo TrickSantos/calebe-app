@@ -7,6 +7,7 @@ import { IEquipe } from "../../../declarations";
 import api from "../../Services/api";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RankingStackParamList } from "../../Routes/ranking.routes";
+import { StatusBar } from "expo-status-bar";
 
 type Props = StackScreenProps<RankingStackParamList, "Ranking">;
 
@@ -39,6 +40,7 @@ const Ranking = ({ navigation }: Props) => {
 
   return (
     <Container>
+      <StatusBar backgroundColor="#127c82" animated />
       <Text>Ranking de Equipes</Text>
       {loading ? (
         <Container>
@@ -139,7 +141,7 @@ const Ranking = ({ navigation }: Props) => {
             {equipes.map(({ id, avatar, nome, pontos }, index) => (
               <Row key={id}>
                 <Colocacao>
-                  <Posicao>{index + 1}</Posicao>
+                  <Posicao>{index + 4}</Posicao>
                 </Colocacao>
                 <EquipeContainer
                   style={style.shadow}
@@ -257,7 +259,7 @@ const ColocacaoContainer = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 0 1rem;
   margin-top: -120px;
   width: 100%;
@@ -274,6 +276,7 @@ const style = StyleSheet.create({
     shadowColor: "#5CEAA0",
     shadowOpacity: 1.0,
     shadowRadius: 20,
+    backgroundColor: "#5ea6a9",
   },
   shadow: {
     marginVertical: 10,
