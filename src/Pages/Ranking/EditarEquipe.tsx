@@ -120,7 +120,7 @@ const EditarEquipe = ({ navigation, route: { params } }: Props) => {
           />
         </FormItem>
         <FormItem>
-          <Label>Email</Label>
+          <Label>Instagram</Label>
           <Controller
             name="instagram"
             control={control}

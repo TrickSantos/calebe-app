@@ -7,7 +7,7 @@ import { StackScreenProps } from "@react-navigation/stack";
 import VideoPlayer from "../../Components/VideoPlayer";
 import api from "../../Services/api";
 import { AxiosError } from "axios";
-import { Image } from "react-native";
+import { Image, View } from "react-native";
 import { FeedStackParamList } from "../../Routes/feed.routes";
 import { StatusBar } from "expo-status-bar";
 
@@ -35,7 +35,7 @@ const Devocional = ({ navigation, route }: Props) => {
   };
 
   return (
-    <Scroll>
+    <Scroll showsVerticalScrollIndicator={false}>
       <StatusBar backgroundColor="#b1d2d6" animated />
       <Container>
         <Action>
@@ -58,8 +58,8 @@ const Devocional = ({ navigation, route }: Props) => {
               {post.cover ? (
                 <Image
                   source={{ uri: post.cover }}
-                  resizeMode="contain"
-                  style={{ width: "100%", height: 200 }}
+                  resizeMode="cover"
+                  style={{ width: "100%", height: 300 }}
                 />
               ) : null}
               <Descricao>{post.conteudo}</Descricao>
@@ -114,7 +114,10 @@ const Devocional = ({ navigation, route }: Props) => {
                     />
                   )}
                 </Click>
-                <Comentario>{comentario.comentario}</Comentario>
+                <View>
+                  <Nome>{comentario.usuario.nome}</Nome>
+                  <Comentario>{comentario.comentario}</Comentario>
+                </View>
               </Row>
             ))}
           </Comentarios>
@@ -137,6 +140,13 @@ const Comentario = styled.Text`
   color: #127c82;
   font-family: "Poppins";
   font-weight: 400;
+  font-size: 12px;
+`;
+
+const Nome = styled.Text`
+  color: #127c82;
+  font-family: "Poppins";
+  font-weight: 500;
   font-size: 14px;
 `;
 

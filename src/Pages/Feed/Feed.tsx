@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, ListRenderItem } from "react-native";
+import { FlatList } from "react-native";
+import * as Linking from "expo-linking";
+import { Feather, FontAwesome5 } from "@expo/vector-icons";
 import styled from "styled-components/native";
 import { IDevocional } from "../../../declarations";
 import Post from "../../Components/Post";
@@ -67,6 +69,26 @@ const Feed = ({ navigation }: Props) => {
   return (
     <FeedContainer>
       <StatusBar backgroundColor="#127c82" animated />
+      <Links>
+        <LinkContainer
+          onPress={() =>
+            Linking.openURL(
+              "https://www.instagram.com/jovensadventistaslestemt/"
+            )
+          }
+        >
+          <Feather name="instagram" size={24} color="black" />
+          <Link>Instagram</Link>
+        </LinkContainer>
+        <LinkContainer
+          onPress={() =>
+            Linking.openURL("https://www.bibliaonline.com.br/nvi/index")
+          }
+        >
+          <FontAwesome5 name="bible" size={24} color="black" />
+          <Link>Biblia Online</Link>
+        </LinkContainer>
+      </Links>
       <FlatList
         data={posts}
         style={{ paddingHorizontal: 20 }}
@@ -83,5 +105,30 @@ const Feed = ({ navigation }: Props) => {
     </FeedContainer>
   );
 };
+
+const Links = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: white;
+`;
+
+const LinkContainer = styled.TouchableOpacity`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  padding: 20px;
+  flex: 1;
+`;
+
+const Link = styled.Text`
+  font-family: "Poppins";
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 5px;
+`;
 
 export default Feed;

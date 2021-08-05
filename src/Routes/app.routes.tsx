@@ -1,10 +1,11 @@
 import React from "react";
-import { Feather, Entypo, Ionicons } from "@expo/vector-icons";
+import { Feather, Entypo, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DesafiosRoutes from "./desafios.routes";
 import RankingRoutes from "./ranking.routes";
 import FeedRoutes from "./feed.routes";
 import ConfigRoutes from "./config.routes";
+import MuralRoutes from "./mural.routes";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,15 +28,7 @@ const AppRoutes: React.FC = () => {
           ),
         }}
       />
-      <Tab.Screen
-        name="Ranking"
-        component={RankingRoutes}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Feather name="award" size={size} color={color} />
-          ),
-        }}
-      />
+
       <Tab.Screen
         name="Desafios"
         component={DesafiosRoutes}
@@ -46,6 +39,24 @@ const AppRoutes: React.FC = () => {
               size={size}
               color={color}
             />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Ranking"
+        component={RankingRoutes}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="award" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Mural"
+        component={MuralRoutes}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <SimpleLineIcons name="feed" size={size} color={color} />
           ),
         }}
       />

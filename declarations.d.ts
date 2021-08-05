@@ -29,6 +29,7 @@ export interface IEquipe {
   igrejaId: number;
   igreja: IIgreja;
   membros: IUsuario[];
+  fotos: IFoto[];
   pontos: number;
   meta: { pontuacao: number | null };
 }
@@ -70,5 +71,20 @@ export interface IComentario {
   devocionalId: number;
   userId: number;
   comentario: string;
+  usuario: IUsuario;
+}
+
+export interface IFoto {
+  id: number;
+  foto: string;
+  userId: number;
+  usuario: IUsuario;
+  likes: ICurtida[];
+}
+
+export interface ICurtida {
+  id: number;
+  fotoId: number;
+  userId: number;
   usuario: IUsuario;
 }
