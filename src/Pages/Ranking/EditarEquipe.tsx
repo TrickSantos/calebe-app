@@ -14,7 +14,7 @@ import {
   Label,
 } from "../../Components";
 import api from "../../Services/api";
-import { IUsuario } from "../../../declarations";
+import { IEquipe, IUsuario } from "../../../declarations";
 import { StyleSheet } from "react-native";
 import { RankingStackParamList } from "../../Routes/ranking.routes";
 import { StatusBar } from "expo-status-bar";
@@ -60,7 +60,7 @@ const EditarEquipe = ({ navigation, route: { params } }: Props) => {
       });
   };
 
-  const onSubmit = async (data: IUsuario) => {
+  const onSubmit = async (data: IEquipe) => {
     setLoading(true);
     await api
       .put(`/equipe/${params.id}`, data)
