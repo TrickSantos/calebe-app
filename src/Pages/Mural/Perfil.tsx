@@ -60,8 +60,8 @@ const Perfil = ({
             <Instagram>Instagram: {equipe.instagram}</Instagram>
           </ClickButton>
           <Infos>
-            <Distrito>CPA 2 - Sede</Distrito>
-            <Igreja>CPA 2 - Sede</Igreja>
+            <Distrito>{equipe.igreja.distrito.nome}</Distrito>
+            <Igreja>{equipe.igreja.nome}</Igreja>
           </Infos>
         </Header>
         <FlatList
