@@ -17,7 +17,7 @@ const Perfil = ({
     params: { equipeId },
   },
 }: Props) => {
-  const [equipe, setEquipe] = useState<IEquipe>({} as IEquipe);
+  const [equipe, setEquipe] = useState<IEquipe | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -27,6 +27,7 @@ const Perfil = ({
         .get(`/equipe/${equipeId}`)
         .then(({ data }) => {
           setEquipe(data);
+          console.log(data);
         })
         .catch((e) => console.log(e))
         .finally(() => setLoading(false));
@@ -43,29 +44,39 @@ const Perfil = ({
         >
           <AntDesign name="arrowleft" size={24} color="#FFF" />
         </ClickButton>
-        <Header>
-          {equipe.avatar ? (
-            <Avatar source={{ uri: equipe.avatar }} />
-          ) : (
-            <NullAvatar>
-              <FontAwesome5 name="user" size={24} color="#127c82" />
-            </NullAvatar>
-          )}
-          <Nome>{equipe.nome}</Nome>
-          <ClickButton
-            onPress={() =>
-              Linking.openURL(`https://www.instagram.com/${equipe.instagram}`)
-            }
-          >
-            <Instagram>Instagram: {equipe.instagram}</Instagram>
-          </ClickButton>
-          <Infos>
-            <Distrito>{equipe.igreja.distrito.nome}</Distrito>
-            <Igreja>{equipe.igreja.nome}</Igreja>
-          </Infos>
-        </Header>
+        {loading ? (
+          <ActivityIndicator size="large" color="#fff" />
+        ) : (
+          <Header>
+            {equipe ? (
+              <>
+                {equipe.avatar ? (
+                  <Avatar source={{ uri: equipe.avatar }} />
+                ) : (
+                  <NullAvatar>
+                    <FontAwesome5 name="user" size={24} color="#127c82" />
+                  </NullAvatar>
+                )}
+                <Nome>{equipe.nome}</Nome>
+                <ClickButton
+                  onPress={() =>
+                    Linking.openURL(
+                      `https://www.instagram.com/${equipe.instagram}`
+                    )
+                  }
+                >
+                  <Instagram>Instagram: {equipe.instagram}</Instagram>
+                </ClickButton>
+                <Infos>
+                  <Distrito>{equipe.igreja.distrito.nome}</Distrito>
+                  <Igreja>{equipe.igreja.nome}</Igreja>
+                </Infos>
+              </>
+            ) : null}
+          </Header>
+        )}
         <FlatList
-          data={equipe.fotos}
+          data={equipe?.fotos}
           showsVerticalScrollIndicator={false}
           refreshing={loading}
           ListFooterComponent={() =>
@@ -118,14 +129,14 @@ const Instagram = styled.Text`
 
 const Distrito = styled.Text`
   font-family: "Poppins";
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
   color: #fff;
 `;
 
 const Igreja = styled.Text`
   font-family: "Poppins";
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
   color: #fff;
 `;
