@@ -155,7 +155,7 @@ function Login({ navigation }: Props) {
                     autoCompleteType="email"
                     placeholderTextColor="#127C82"
                     placeholder="Email"
-                    onChange={onChange}
+                    onChangeText={(text) => onChange(text.trim())}
                     value={value}
                     onBlur={onBlur}
                   />
