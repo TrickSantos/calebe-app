@@ -73,8 +73,8 @@ const FotoMural = ({ foto, usuario, id, likes }: IFoto) => {
         source={{
           uri: foto,
         }}
-        style={{ width, height: 300 }}
-        resizeMode="cover"
+        style={{ width, height: 400 }}
+        resizeMode="contain"
       />
       <Footer>
         <ActionContainer onPress={liked ? handleUnlike : handleCurtir}>

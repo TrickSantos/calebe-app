@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, View, ActivityIndicator } from "react-native";
+import { FlatList, View, ActivityIndicator, Dimensions } from "react-native";
 import styled from "styled-components/native";
 import { MuralStackParamList } from "../../Routes/mural.routes";
 import { StackScreenProps } from "@react-navigation/stack";
@@ -10,6 +10,8 @@ import api from "../../Services/api";
 import FotoMural from "../../Components/FotoMural";
 
 type Props = StackScreenProps<MuralStackParamList, "Mural">;
+
+const { width } = Dimensions.get("window");
 
 const Mural = ({ navigation }: Props) => {
   const { user } = useAuth();
@@ -87,6 +89,7 @@ const Mural = ({ navigation }: Props) => {
 
 const Container = styled.View`
   flex: 1;
+  width: ${width}px;
   background-color: #127c82;
 `;
 
