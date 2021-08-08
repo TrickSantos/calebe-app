@@ -92,7 +92,7 @@ const Resposta = ({ navigation, route: { params } }: Props) => {
         {fields.map((resposta, index) => (
           <Envio key={resposta.id}>
             <Feather name="file" size={24} color="#127C82" />
-            <NomeArquivo>{`Arquivo ${index}`}</NomeArquivo>
+            <NomeArquivo>{`Arquivo ${index + 1}`}</NomeArquivo>
             <Click
               style={{ marginRight: "1rem" }}
               onPress={() => remove(index)}
