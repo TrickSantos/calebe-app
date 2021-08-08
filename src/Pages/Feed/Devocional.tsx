@@ -7,9 +7,11 @@ import { StackScreenProps } from "@react-navigation/stack";
 import VideoPlayer from "../../Components/VideoPlayer";
 import api from "../../Services/api";
 import { AxiosError } from "axios";
-import { Image, View } from "react-native";
+import { Image, View, Dimensions } from "react-native";
 import { FeedStackParamList } from "../../Routes/feed.routes";
 import { StatusBar } from "expo-status-bar";
+
+const { width } = Dimensions.get("window");
 
 type Props = StackScreenProps<FeedStackParamList, "Devocional">;
 const Devocional = ({ navigation, route }: Props) => {
@@ -58,8 +60,8 @@ const Devocional = ({ navigation, route }: Props) => {
               {post.cover ? (
                 <Image
                   source={{ uri: post.cover }}
-                  resizeMode="cover"
-                  style={{ width: "100%", height: 300 }}
+                  resizeMode="contain"
+                  style={{ width: "100%", height: 500 }}
                 />
               ) : null}
               <Descricao>{post.conteudo}</Descricao>
@@ -116,6 +118,7 @@ const Devocional = ({ navigation, route }: Props) => {
                 </Click>
                 <View>
                   <Nome>{comentario.usuario.nome}</Nome>
+
                   <Comentario>{comentario.comentario}</Comentario>
                 </View>
               </Row>
@@ -134,6 +137,7 @@ const Scroll = styled.ScrollView`
   background-color: #b1d2d6;
   padding: 1rem 2rem;
   flex: 1;
+  width: ${width}px;
 `;
 
 const Comentario = styled.Text`
@@ -141,6 +145,10 @@ const Comentario = styled.Text`
   font-family: "Poppins";
   font-weight: 400;
   font-size: 12px;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  word-wrap: break-word;
 `;
 
 const Nome = styled.Text`

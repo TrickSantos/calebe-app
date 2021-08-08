@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList } from "react-native";
+import { FlatList, Dimensions } from "react-native";
 import * as Linking from "expo-linking";
 import { Feather, FontAwesome5 } from "@expo/vector-icons";
 import styled from "styled-components/native";
@@ -11,8 +11,11 @@ import { ActivityIndicator } from "react-native-paper";
 import { FeedStackParamList } from "../../Routes/feed.routes";
 import { StatusBar } from "expo-status-bar";
 
+const { width } = Dimensions.get("window");
+
 const FeedContainer = styled.SafeAreaView`
   flex: 1;
+  width: ${width}px;
   background-color: #127c82;
 `;
 

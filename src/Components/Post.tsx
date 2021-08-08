@@ -6,7 +6,9 @@ import VideoPlayer from "./VideoPlayer";
 import { useAuth } from "../Context/AuthContext";
 import api from "../Services/api";
 import { useNavigation } from "@react-navigation/native";
-import { Image } from "react-native";
+import { Image, Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 const Container = styled.View`
   background-color: #ffffff;
@@ -162,7 +164,7 @@ const Post = ({ post }: Props) => {
               <Image
                 source={{ uri: post.cover }}
                 resizeMode="contain"
-                style={{ width: "100%", height: 250 }}
+                style={{ width: "100%", height: 400 }}
               />
             ) : null}
             <Devocional numberOfLines={10}>{post.conteudo}</Devocional>

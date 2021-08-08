@@ -37,7 +37,7 @@ const Desafio = ({ navigation, route: { params } }: Props) => {
                 <Image
                   source={{ uri: params.cover }}
                   resizeMode="contain"
-                  style={{ width: "100%", height: 200 }}
+                  style={{ width: "100%", height: 300 }}
                 />
               ) : null}
               <Descricao>{params.conteudo}</Descricao>
