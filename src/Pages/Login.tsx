@@ -154,6 +154,7 @@ function Login({ navigation }: Props) {
                   <Input
                     autoCompleteType="email"
                     placeholderTextColor="#127C82"
+                    autoCapitalize="none"
                     placeholder="Email"
                     onChangeText={(text) => onChange(text.trim())}
                     value={value}
