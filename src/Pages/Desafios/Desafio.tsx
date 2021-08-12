@@ -40,9 +40,9 @@ const Desafio = ({ navigation, route: { params } }: Props) => {
                   style={{ width: "100%", height: 300 }}
                 />
               ) : null}
-              <Descricao>{params.conteudo}</Descricao>
             </>
           )}
+          <Descricao>{params.conteudo}</Descricao>
         </Content>
         {user && (user.perfil === "lider" || user.perfil === "admin") && (
           <Preencher
