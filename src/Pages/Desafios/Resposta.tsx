@@ -9,6 +9,7 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { DesafiosStackParamsList } from "../../Routes/desafios.routes";
 import { AxiosError } from "axios";
 import { StatusBar } from "expo-status-bar";
+import { ScrollView } from "react-native";
 
 type RespostaType = {
   resposta: string;
@@ -88,7 +89,8 @@ const Resposta = ({ navigation, route: { params } }: Props) => {
           <Text>Desafio 1</Text>
         </Titulo>
       </Action>
-      <Content>
+
+      <Content showsVerticalScrollIndicator={false}>
         {fields.map((resposta, index) => (
           <Envio key={resposta.id}>
             <Feather name="file" size={24} color="#127C82" />
@@ -101,16 +103,16 @@ const Resposta = ({ navigation, route: { params } }: Props) => {
             </Click>
           </Envio>
         ))}
+        {fields.length > 0 && (
+          <Salvar onPress={() => handleSubmit(onSubmit)()}>
+            {loading ? (
+              <ActivityIndicator animating={true} color="#FFF" />
+            ) : (
+              <TextButton>Salvar</TextButton>
+            )}
+          </Salvar>
+        )}
       </Content>
-      {fields.length > 0 && (
-        <Salvar onPress={() => handleSubmit(onSubmit)()}>
-          {loading ? (
-            <ActivityIndicator animating={true} color="#FFF" />
-          ) : (
-            <TextButton>Salvar</TextButton>
-          )}
-        </Salvar>
-      )}
       <FAB
         small
         icon="plus"
@@ -171,7 +173,7 @@ const Action = styled.View`
   align-items: center;
 `;
 
-const Content = styled.View`
+const Content = styled.ScrollView`
   width: 100%;
 `;
 
