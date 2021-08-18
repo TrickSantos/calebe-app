@@ -4,12 +4,13 @@ import { AntDesign, MaterialIcons, Feather } from "@expo/vector-icons";
 import { ActivityIndicator, FAB } from "react-native-paper";
 import * as Picker from "expo-image-picker";
 import api from "../../Services/api";
-import { useFieldArray, useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { StackScreenProps } from "@react-navigation/stack";
 import { DesafiosStackParamsList } from "../../Routes/desafios.routes";
 import { AxiosError } from "axios";
 import { StatusBar } from "expo-status-bar";
 import { ScrollView } from "react-native";
+import { Input, Label } from "../../Components";
 
 type RespostaType = {
   resposta: string;
@@ -103,14 +104,37 @@ const Resposta = ({ navigation, route: { params } }: Props) => {
             </Click>
           </Envio>
         ))}
+
         {fields.length > 0 && (
-          <Salvar onPress={() => handleSubmit(onSubmit)()}>
-            {loading ? (
-              <ActivityIndicator animating={true} color="#FFF" />
-            ) : (
-              <TextButton>Salvar</TextButton>
-            )}
-          </Salvar>
+          <>
+            <Observacao>
+              <Label>Observação</Label>
+              <Controller
+                control={control}
+                name="observacao"
+                render={({ field: { onChange, value, onBlur } }) => (
+                  <Input
+                    placeholder="Observações..."
+                    placeholderTextColor="#127c82"
+                    multiline={true}
+                    numberOfLines={3}
+                    maxLength={255}
+                    style={{ height: 90, textAlignVertical: "top" }}
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                  />
+                )}
+              />
+            </Observacao>
+            <Salvar onPress={() => handleSubmit(onSubmit)()}>
+              {loading ? (
+                <ActivityIndicator animating={true} color="#FFF" />
+              ) : (
+                <TextButton>Salvar</TextButton>
+              )}
+            </Salvar>
+          </>
         )}
       </Content>
       <FAB
@@ -132,6 +156,10 @@ const Resposta = ({ navigation, route: { params } }: Props) => {
 
 const Titulo = styled.View`
   flex: 1;
+`;
+
+const Observacao = styled.View`
+  margin: 1rem 0;
 `;
 
 const Container = styled.View`
