@@ -41,13 +41,14 @@ const Ranking = ({ navigation }: Props) => {
   return (
     <Container>
       <StatusBar backgroundColor="#127c82" animated />
-      <Text>Ranking de Equipes</Text>
+      <Text>Ranking de Equipes em breve...</Text>
       {loading ? (
         <Container>
           <ActivityIndicator animating={true} color="#fff" />
         </Container>
       ) : (
-        <>
+        {
+          /* <>
           {primeiro && segundo && terceiro && (
             <>
               <PrimeiroContainer>
@@ -166,7 +167,8 @@ const Ranking = ({ navigation }: Props) => {
               </Row>
             ))}
           </RankingContainer>
-        </>
+        </> */
+        }
       )}
     </Container>
   );
